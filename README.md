@@ -28,7 +28,7 @@ websocketd --port=8080 ruby non_random_inventory.rb
 - *The id (e.g. 9-1) is to make it easier to see which alert message corresponds with which Inventory message.*
 
 ## Clear Alerts before a test
-- rails c
+- ```ruby rails c ```
 - Alert.destroy_all
 
 # Design
