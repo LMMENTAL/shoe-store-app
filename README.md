@@ -9,31 +9,31 @@
 # Setup
 
 ## App Configuration
-- brew install websocketd
-- brew install postgresql@16
-- bundle install
-- rake db:prepare
+- ```brew install websocketd```
+- ```brew install postgresql@16```
+- ```bundle install```
+- ```rake db:prepare```
 
 ## Run Localhost Server
-- rails s
+- ```rails s```
 
 ## Run Websocket Server
-websocketd --port=8080 ruby non_random_inventory.rb
+```websocketd --port=8080 ruby non_random_inventory.rb```
 
 ## Run Singleton To Parse Data Stream
-- rails c
-- InventoryDataParser.instance
+- ```rails c```
+- ```InventoryDataParser.instance```
 
 ## Monitor at http://localhost:3000/
 - *The id (e.g. 9-1) is to make it easier to see which alert message corresponds with which Inventory message.*
 
 ## Clear Alerts before a test
-- ```ruby rails c ```
-- Alert.destroy_all
+- ```rails c```
+- ```Alert.destroy_all```
 
-# Design
+# Design Notes
 
-- Websocket server and demo initiated by running to simulate incoming inventory updates from stores: websocketd --port=8080 ruby non_random_inventory.rb
+- Websocket server and demo initiated by running to simulate incoming inventory updates from stores.
 - Singleton instance to parse websocket payloads and update inventory records.
 - Rails Observer callback for Inventory object will check if Inventory drops below a set threshold and create an alert after finding the nearest store with sufficient inventory.
 - live_alerts partial polls GET /alerts endpoint for new entries to insert into top of FE list. If any alerts are dropped because of polling a page refresh can get all alerts.
