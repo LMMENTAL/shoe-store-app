@@ -35,6 +35,7 @@
 
 - Websocket server and demo initiated by running to simulate incoming inventory updates from stores.
 - Singleton instance using faye-websocket client and event-machine gem to parse websocket payloads and update inventory records.
+- The Inventories are stored in a PG dB as a joins table linking Store and Product to implement a many-to-many relationship between Store and Product. There is also a one-to-many Inventory to Alerts.
 - Rails Observer callback for Inventory object will check if Inventory drops below a set threshold and create an alert after finding the nearest store with sufficient inventory.
 - live_alerts partial polls GET /alerts endpoint for new entries to insert into top of FE list. If any alerts are dropped because of polling a page refresh can get all alerts.
 - On page refresh the alerts tab will fetch all alerts ordered by the stores whose closest inventories are farthest away, colour coding them in levels based on the nearest log value of the distance away in km.
