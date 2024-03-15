@@ -1,3 +1,11 @@
+# Description
+
+- This app runs a script to simulate external inventory updates coming into the system. 
+- The system updates the inventories accordingly and creates an alert detailing the nearest store with sufficient inventory if the inventory at a given store drops below the product's set threshold.
+- The FE polls for new alerts and displays them as they come in varying the text color based on distance away to nearest sufficiently stocked inventory.
+
+![alt text] (Inventory Alerts.png)
+
 # Setup
 
 ## App Configuration
