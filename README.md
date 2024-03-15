@@ -9,9 +9,10 @@
 # Setup
 
 ## App Configuration
+- brew install websocketd
+- brew install postgresql@16
 - bundle install
-- rake db:migrate
-- rake db:seed
+- rake db:prepare
 
 ## Run Localhost Server
 - rails s

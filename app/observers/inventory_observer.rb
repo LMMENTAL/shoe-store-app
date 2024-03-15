@@ -1,7 +1,7 @@
 # Observes Inventory to check if the value goes below or above a certain threshold which is dynamic based on the product threshold value.
 class InventoryObserver < ActiveRecord::Observer
 
-  def after_save(inventory)
+  def after_update(inventory)
     return unless inventory.count < inventory.product.inventory_threshold
 
     store = inventory.store

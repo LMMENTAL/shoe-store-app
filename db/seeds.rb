@@ -37,15 +37,10 @@ SHOE_MODELS = [
 VALUES = Array(0..100)
 
 SHOE_STORES.each{ |store| Store.create!(name: store[0], latitude: store[1], longitude: store[2]) }
-SHOE_MODELS.each do |shoe|
-  Shoe.create!(name: shoe, cost: VALUES.sample)
-end
+SHOE_MODELS.each{ |shoe| Shoe.create!(name: shoe, cost: VALUES.sample) }
 
 Store.pluck(:id).each do |store_id|
   Shoe.pluck(:id).each do |shoe_id|
     Inventory.create!(store_id: store_id, product_id: shoe_id, count: VALUES.sample)
   end
 end
-
-# Reset alerts for purpose of demo
-Alert.destroy_all
