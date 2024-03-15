@@ -18,7 +18,7 @@
 - ```rails s```
 
 ## Run Websocket Server
-```websocketd --port=8080 ruby non_random_inventory.rb```
+- ```websocketd --port=8080 ruby non_random_inventory.rb```
 
 ## Run Singleton To Parse Data Stream
 - ```rails c```
