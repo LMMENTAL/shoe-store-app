@@ -1,0 +1,2 @@
+class Tee < Product
+end

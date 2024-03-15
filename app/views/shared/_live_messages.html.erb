@@ -1,0 +1,74 @@
+<div class="message-container">
+  <div class="message-header">
+    <h3><%= title %></h3>
+  </div>
+  <div id="message-content" style="display: block;">
+  </div>
+</div>
+
+<style>
+  .message-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow:scroll;
+  }
+
+  .message-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .message-header h3 {
+    margin: 0;
+  }
+
+  .message-content {
+    padding: 10px;
+  }
+
+  .message-bubble {
+    background-color: #ADDFFF;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .red-bubble {
+    background-color: #FF7F7F;
+  }
+
+  .pink-bubble {
+    background-color: #FFD1DF;
+  }
+
+  .toggle-icon {
+    float: right;
+  }
+</style>
+
+<script type="text/javascript" language="javascript">
+
+  var ws = new WebSocket('ws://localhost:8080/');
+
+  ws.onmessage = function(event) {
+    var message_json = JSON.parse(event.data);
+
+    var message = `${message_json.id}; ${message_json.time}: ${message_json.store} store sold a pair of ${message_json.model} shoes. ${message_json.store} now has ${message_json.inventory} pairs of ${message_json.model} left.`
+
+    var newDiv = document.createElement("div");
+    newDiv.classList.add('message-bubble');
+    if (message_json.inventory < 10) {
+      newDiv.classList.add('red-bubble');
+    } else if (message_json.inventory > 90) {
+      newDiv.classList.add('pink-bubble');
+    }
+    var newContent = document.createTextNode(message);
+    newDiv.prepend(newContent);
+
+    document.getElementById('message-content').prepend(newDiv);
+  };
+
+</script>

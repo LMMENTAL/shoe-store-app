@@ -1,0 +1,2 @@
+class Pants < Product
+end
