@@ -1,50 +1,6 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-
-  $( document ).ready(function(){
-    setTimeout(fetchdata(true),100000); 
-    console.log("Begin Polling");
-  });
-
-  function fetchdata(no_delay){ 
-    var url;
-    if (no_delay) {
-      url = '/alerts';
-    } else {
-      url = '/alerts?delay=1';
-    };
-    $.ajax({ 
-      url: url,
-      type: 'get',
-      success: function(data){
-       // Perform operation on return value
-        if (!$.isEmptyObject(data)) {
-          jQuery.each( data, function( i, val ) {
-            appendAlertBubble(val);
-          });
-        };
-       }, 
-       complete:function(data){ 
-         setTimeout(fetchdata,1000); 
-       } 
-    }); 
-  } 
-  
-  function appendAlertBubble(data) {
-    message = `${data.created_at}: ${data.message}`
-    var newDiv = document.createElement("div");
-    newDiv.classList.add('alerts-message-bubble');
-    newDiv.style.color = data.level;
-    var newContent = document.createTextNode(message);
-    newDiv.prepend(newContent);
-
-    document.getElementById('alerts-message-content').prepend(newDiv);
-  };
-
-</script>
 <div class="message-container">
   <div class="message-header">
-    <h3><%= title %></h3>
+    <h3>Live Alerts</h3>
   </div>
   <div id="alerts-message-content" style="display: block;">
   </div>
@@ -92,3 +48,48 @@
     float: right;
   }
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+  $( document ).ready(function(){
+    setTimeout(fetchdata(true),100000); 
+    console.log("Begin Polling");
+  });
+
+  function fetchdata(no_delay){ 
+    var url;
+    if (no_delay) {
+      url = '/alerts';
+    } else {
+      url = '/alerts?delay=1';
+    };
+    $.ajax({ 
+      url: url,
+      type: 'get',
+      success: function(data){
+       // Perform operation on return value
+        if (!$.isEmptyObject(data)) {
+          jQuery.each( data, function( i, val ) {
+            appendAlertBubble(val);
+          });
+        };
+       }, 
+       complete:function(data){ 
+         setTimeout(fetchdata,1000); 
+       } 
+    }); 
+  } 
+  
+  function appendAlertBubble(data) {
+    message = `${data.created_at}: ${data.message}`
+    var newDiv = document.createElement("div");
+    newDiv.classList.add('alerts-message-bubble');
+    newDiv.style.color = data.level;
+    var newContent = document.createTextNode(message);
+    newDiv.prepend(newContent);
+
+    document.getElementById('alerts-message-content').prepend(newDiv);
+  };
+
+</script>

@@ -10,7 +10,6 @@ class InventoryDataParser
       ws = Faye::WebSocket::Client.new('ws://localhost:8080/')
 
       ws.on :message do |event|
-        puts JSON.parse(event.data)
         update_inventories(JSON.parse(event.data))
       end
     }

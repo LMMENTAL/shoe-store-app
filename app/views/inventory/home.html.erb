@@ -1,13 +1,10 @@
 <div class="wrapper">
   <table>
   <td>
-    <!-- <%= render partial: '/shared/live_alerts', locals: { title: "Live Alerts", messages: @messages } %> -->
+    <%= render partial: '/shared/live_messages' %>
   </td>
   <td>
-    <%= render partial: '/shared/live_messages', locals: { title: "Live Inventory Updates", messages: @messages } %>
-  </td>
-  <td>
-    <%= render partial: '/shared/live_alerts', locals: { title: "Live Alerts", messages: @messages } %>
+    <%= render partial: '/shared/live_alerts' %>
   </td>
   </table>
 </div>

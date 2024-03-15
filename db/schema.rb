@@ -58,4 +58,3 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_15_002208) do
   end
 
 end
-pages = Store.joins(:products).where(['stores.name = ? AND products.name LIKE ?', 'ALDO C%', 'MCTYRE'])

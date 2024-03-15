@@ -9,17 +9,14 @@ class Store < ApplicationRecord
   
   STORE_RADII = [10**-1, 1, 10, 10**2, 10**3, 10**4, 10**5]
 
-  # Filtering for stores wiht sufficient inventory.
+  # Filtering for stores with sufficient inventory.
   # Incrementally expanding radius in a log scale until values are returned to avoid doing extra in memory calculation on all stores
   # Could benchmark other solutions or analyze data to better choose step sizes if given more time.
   def closest_cluster(product_id)
     stores = Store.with_sufficient_inventory(product_id)
     STORE_RADII.each do |radius|
       nearby_stores = stores.nearby_stores(latitude, longitude, radius, id)
-      if nearby_stores.any?
-        # get store_ids that meet product threshold criteria and add .where(id: ids), return stores if non zero
-        return nearby_stores.select(:latitude, :longitude, :id)
-      end
+      return nearby_stores.select(:latitude, :longitude, :id) if nearby_stores.any?
     end
     return []
   end
@@ -47,5 +44,3 @@ class Store < ApplicationRecord
   end
 
 end
-
-

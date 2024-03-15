@@ -9,7 +9,7 @@ class InventoryObserver < ActiveRecord::Observer
     nearest_store, distance_away = store.closest_store(inventory.product_id)
     message = "\u26A0 #{store.name} is running low on #{product.name} (#{inventory.count}). The closest store with sufficient inventory is #{nearest_store.name} which is #{(distance_away/1000).round}km away. 'Websocket Payload ID: #{inventory.websocket_payload_id}'".encode("utf-8")
     level = Math.log(distance_away/1000).round
-    puts "message: #{message}, level: #{level}, #{(distance_away/1000).round}km"
+
     Alert.create(message:, level:, inventory_id: inventory.id)
   end
 
