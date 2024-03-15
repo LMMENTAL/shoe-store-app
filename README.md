@@ -4,7 +4,7 @@
 - The system updates the inventories accordingly and creates an alert detailing the nearest store with sufficient inventory if the inventory at a given store drops below the product's set threshold.
 - The FE polls for new alerts and displays them as they come in varying the text color based on distance away to nearest sufficiently stocked inventory.
 
-![alt text] (Inventory Alerts.png)
+![Inventory Alerts](https://github.com/LMMENTAL/shoe-store-app/assets/10554604/0bb14412-c583-4ff4-b5b3-6d85c24cafa8)
 
 # Setup
 
